@@ -15,35 +15,10 @@ public class nQueens2 {
     static JLabel[][] jLabel;
     static int[][] board;
 
-    static class settingsFrame extends JFrame{
-        settingsFrame(){
-            setVisible(true);
-            setSize(500,500);
-            setLayout(new FlowLayout());
-            setTitle("N Queens Visualization");
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-            JLabel l1= new JLabel("Set Board Size: ");
-            JTextField text= new JTextField(10);
-            JButton btn= new JButton("Run");
-
-            add(l1);
-            add(text);
-            add(btn);
-
-            btn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    n= Integer.parseInt( text.getText() );
-
-                    myFrame obj= new myFrame();
-                    solveNQueen(n, 0);
-                }
-            });
-        }
-    }
     static class myFrame extends JFrame{
-        myFrame(){
+        myFrame(int boardSize){
+            n= boardSize;
+
             jLabel = new JLabel[n][n];
             board= new int[n][n];
 
@@ -68,6 +43,8 @@ public class nQueens2 {
                     add(jLabel[i][j]);
                 }
             }
+
+//            solveNQueen(n, 0);
         }
     }
 
@@ -77,7 +54,8 @@ public class nQueens2 {
         hor= new HashSet<>();
         ver= new HashSet<>();
 
-        settingsFrame obj= new settingsFrame();
+        myFrame obj= new myFrame( Integer.parseInt(args[0]) );
+        solveNQueen(n, 0);
     }
 
     public static void solveNQueen(int queens, int row){
