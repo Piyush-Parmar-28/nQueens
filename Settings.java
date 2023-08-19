@@ -12,16 +12,22 @@ public class Settings {
             JTextField text= new JTextField(10);
             JButton btn= new JButton("Run");
 
+            JLabel l2= new JLabel("Set Animation delay (ms): ");
+            JSlider slider= new JSlider();
+
             add(l1);
             add(text);
             add(btn);
+            add(l2);
+            add(slider);
 
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String n= text.getText();
+                    int speed= slider.getValue();
 
-                    String[] args= {n};
+                    String[] args= {n, Integer.toString(speed)};
                     nQueens2.main(args);
                 }
             });
